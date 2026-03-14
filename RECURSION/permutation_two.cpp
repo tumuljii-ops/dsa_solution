@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool canPlace(vector<int>& nums, int ind, int i) {
+        for (int j = ind; j < i; j++) {
+            if (nums[j] == nums[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void solve(int ind, vector<int>& nums, vector<vector<int>>& ans) {
+        if (ind == nums.size()) {
+            ans.push_back(nums);
+            return;
+        }
+
+        for (int i = ind; i < nums.size(); i++) {
+            if (canPlace(nums, ind, i) == false) {
+                continue;
+            }
+
+            swap(nums[ind], nums[i]);
+            solve(ind + 1, nums, ans);
+            swap(nums[ind], nums[i]);
+        }
+    }
+
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        vector<vector<int>> ans;
+        solve(0, nums, ans);
+        return ans;
+    }
+};

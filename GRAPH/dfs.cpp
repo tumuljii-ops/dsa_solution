@@ -1,44 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void add(vector<vector<int>>&adj,int u,int v){
+void add(int u,int v,vector<vector<int>>&adj){
     adj[u].push_back(v);
     adj[v].push_back(u);
 }
 
-void dfs(vector<int>&visited,int start,vector<vector<int>>&adj){
-    cout<<start<<" ";
-    visited[start]=true;
+void dfs(int start,vector<vector<int>>&adj,vector<int>&visited){
+      cout<<start<<'\n';
+      visited[start]=true;
 
-    for(auto it: adj[start]){
+      for(auto it:adj[start]){
         if(!visited[it]){
-            dfs(visited,it5,adj);
+            dfs(it,adj,visited);
         }
-    }
-
+      }
 }
 
 int main(){
-    int n;
-    cout<<"enter the number of nodes:";
-    cin>>n;
+    int u;
+    int v;
+    int n=5;
 
-    vector<int>visited(n,false);
-    vector<vector<int>>adj(n);
-    
-    for(int i=0;i<n-1;i++){
-        int u,v;
-        cin>>u>>v;
-        add(adj,u,v);
-    }
-    
-    
-    cout<<"dfs traversal is :";
+    vector<vector<int>>adj(5);
+
     for(int i=0;i<n;i++){
+        cin>>u;
+        cin>>v;
+       add(u,v,adj);
+    }
+
+    vector<int>visited(5,false);
+
+    for(int i=0;i<5;i++){
         if(!visited[i]){
-            dfs(visited,i,adj);
+            dfs(i,adj,visited);
         }
     }
-
+    return 0;
 
 }

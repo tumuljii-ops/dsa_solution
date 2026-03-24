@@ -1,23 +1,35 @@
 class Solution {
 public:
-    void dfs(int sr, int sc, int originalColor, int newColor, vector<vector<int>>& image) {
-        int n = image.size();
-        int m = image[0].size();
-        if(sr < 0 || sc < 0 || sr >= n || sc >= m || image[sr][sc] != originalColor)
-            return;
+    void dfs(vector<vector<int>>& image,int sr,int sc,int start,vector<vector<int>>&visited,int color){
+         
+         int m=image.size();
+         int n=image[0].size();
 
-        image[sr][sc] = newColor;
+         if(sr>=m || sc>=n ||sc<0 ||sr<0||visited[sr][sc]||image[sr][sc]!=start) return ;
 
-        dfs(sr + 1, sc, originalColor, newColor, image);
-        dfs(sr - 1, sc, originalColor, newColor, image);
-        dfs(sr, sc + 1, originalColor, newColor, image);
-        dfs(sr, sc - 1, originalColor, newColor, image);
+         image[sr][sc]=color;
+         visited[sr][sc]=true;
+
+         dfs(image,sr+1,sc,start,visited,color);
+         dfs(image,sr-1,sc,start,visited,color);
+         dfs(image,sr,sc+1,start,visited,color);
+         dfs(image,sr,sc-1,start,visited,color);
+
+
     }
-
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        int originalColor = image[sr][sc];
-        if(originalColor != color) 
-            dfs(sr, sc, originalColor, color, image);
-        return image;
+           
+             int row=image.size();
+             int col=image[0].size();
+
+             int start=image[sr][sc];
+
+             if(start==color) return image;
+             vector<vector<int>>visited(row,vector<int>(col,false));
+
+             dfs(image,sr,sc,start,visited,color);
+
+             return image;
+
     }
 };

@@ -22,3 +22,24 @@ public:
            return min(num,num1);
     }
 };
+
+// ----------------------min cost climbing stairs ---------------
+
+  int minCostClimbingStairs(vector<int>& cost) {
+        
+              int n = cost.size();
+              vector<int> ans(n+1);
+
+              ans[0] = 0;
+              ans[1] = 0;
+
+              for (int i = 2; i <= n; i++) {
+                  int first_step = ans[i-1] + cost[i-1];
+                int second_step = ans[i-2] + cost[i-2];
+
+                 ans[i] = min(first_step, second_step);
+                 }
+
+    return ans[n];
+    }
+};

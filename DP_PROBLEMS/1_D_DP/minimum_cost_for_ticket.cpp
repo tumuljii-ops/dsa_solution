@@ -33,8 +33,35 @@ public:
     }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
           int n=days.size();
-          vector<int>dp(n+1,-1);
 
-          return memo(days,costs,dp,0);
+          vector<int>dp(n+1,0);
+
+          dp[n]=0;
+
+          for(int i=n-1;i>=0;i--){
+                 int cost=0;
+                 cost=cost+costs[0]+dp[i+1];
+
+                 int index=i;
+                 while(index<n && days[index]<days[i]+7){
+                     index++;
+                 }
+
+                 int cost1=0;
+                 cost1=cost1+costs[1]+dp[index];
+
+                 int cost2=0;
+                 int indd=i;
+                 while(indd<n && days[indd]<days[i]+30){
+                    indd++;
+                 }
+                 cost2=cost2+costs[2]+dp[indd];
+
+                 dp[i]=min(cost,min(cost1,cost2));
+          }
+
+          return dp[0];
     }
 };
+
+// code is tabulation + memoization 

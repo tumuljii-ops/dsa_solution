@@ -30,3 +30,27 @@ class Solution {
          
     }
 };
+
+// tabulation part --------------
+ int findMaxSum(vector<int>& arr) {
+        int n=arr.size();
+        
+        vector<int>dp(n+2,0);
+        
+        if(n==0) return 0;
+        if(n==1) return arr[0];
+        
+        for(int i=n-1;i>=0;i--){
+               int not_take=dp[i+1];
+               
+               int take=0;
+               
+                take=arr[i]+dp[i+2];
+               
+               dp[i]=max(take,not_take);
+        }
+        
+        return dp[0];
+         
+    }
+};

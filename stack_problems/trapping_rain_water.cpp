@@ -27,32 +27,30 @@ public:
         }
 
         return total;*/
-        int left=0;
+        
+        int l=0;
         int n=height.size();
-        int right=n-1;
-        int left_max=0;
-        int right_max=0;
+        int r=n-1;
+        
+        int leftmax=0;
+        int rightmax=0;
         int total=0;
-        while(left<right){
-             if(height[left]<=height[right]){
-                if(height[left]>=left_max){
-                    left_max=height[left];
-                }
-                else{
-                    total=total+(left_max-height[left]);
-                }
-                left++;
-             }
-             else{
-                  if(height[right]>=right_max){
-                    right_max=height[right];
-                  }
-                  else{
-                    total=total+(right_max-height[right]);
-                  }
-                  right--;
-             }
+
+        while(l<r){
+              
+            leftmax=max(leftmax,height[l]);
+            rightmax=max(rightmax,height[r]);
+
+            if(leftmax<rightmax){
+                 total=total+(leftmax-height[l]);
+                 l++;
+            }
+            else{
+                total=total+(rightmax-height[r]);
+                r--;
+            }
         }
+
         return total;
 
     }

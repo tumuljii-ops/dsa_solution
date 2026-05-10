@@ -8,7 +8,7 @@ int hcf(int a,int b){
         b=a;
         a=temp;
     }
-    return b;r
+    return b;
 }
 
 int main(){

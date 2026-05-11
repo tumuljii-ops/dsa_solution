@@ -1,58 +1,49 @@
 class Solution {
 public:
-    
     vector<int> dijkstra(int V, vector<vector<int>> &edges, int src) {
 
         vector<vector<pair<int,int>>> adj(V);
 
-        // build adjacency list
-        for(auto e : edges)
-        {
+        for (auto &e : edges) {
             int u = e[0];
             int v = e[1];
             int w = e[2];
 
-            adj[u].push_back({v,w});
-            adj[v].push_back({u,w});   // remove if graph is directed
+            adj[u].push_back({v, w});
+            adj[v].push_back({u,w});
         }
 
-        vector<int> dist(V, INT_MAX);
+        vector<int> dis(V, INT_MAX);
+        dis[src] = 0;
 
-        dist[src] = 0;
+        priority_queue<pair<int,int>,
+                       vector<pair<int,int>>,
+                       greater<pair<int,int>>> pq;
 
-        priority_queue<
-            pair<int,int>,
-            vector<pair<int,int>>,
-            greater<pair<int,int>>
-        > pq;
+        pq.push({0, src});
 
-        pq.push({0,src});
+        while (!pq.empty()) {
 
-        while(!pq.empty())
-        {
-            int d = pq.top().first;
-            int node = pq.top().second;
+            auto top = pq.top();
             pq.pop();
 
-            if(d != dist[node])
-            {
-                continue;
-            }
+            int d = top.first;
+            int node = top.second;
 
-            for(auto edge : adj[node])
-            {
-                int nextNode = edge.first;
-                int weight = edge.second;
 
-                if(dist[node] + weight < dist[nextNode])
-                {
-                    dist[nextNode] = dist[node] + weight;
+            for (auto it : adj[node]) {
 
-                    pq.push({dist[nextNode], nextNode});
+                int adjnode = it.first;
+                int wt = it.second;
+
+                if (dis[node] + wt < dis[adjnode]) {
+
+                    dis[adjnode] = dis[node] + wt;
+                    pq.push({dis[adjnode], adjnode});
                 }
             }
         }
 
-        return dist;
+        return dis;
     }
 };

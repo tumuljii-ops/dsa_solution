@@ -4,53 +4,81 @@ using namespace std;
 class vector{
 
      private:
+
      int size;
      int cap;
      int* arr;
 
      void resize(){
-         
           cap=cap*2;
 
           int* newarr=new int[cap];
 
           for(int i=0;i<size;i++){
-
-            newarr[i]=arr[i];
+               newarr[i]=arr[i];
           }
 
-          delete arr;
+          delete[] arr;
           arr=newarr;
      }
 
      public:
 
      vector(){
-        size=0;
-        cap=1;
-        arr=new int[cap];
+          size=0;
+          cap=1;
+          arr=new int[cap];
      }
 
      void push_back(int val){
-          
+           
            if(size==cap){
-              resize();
+                resize();
            }
 
            arr[size++]=val;
      }
 
      void pop_back(){
-         
-           if(size>0){
-            size--;
-           }
+           
+          if(size>0){
+               size--;
+          }
      }
 
      int sizee(){
-          return size;
+           return size;
      }
 
-     
+     int capacity(){
+          return cap;
+     }
+
+     void print_vector(){
+          
+          for(int i=0;i<size;i++){
+               cout<<arr[i]<<" ";
+
+          }
+          cout<<endl;
+     }
+
+     ~vector(){
+          delete[] arr;
+     }
+
 
 };
+
+int main(){
+     vector v;
+
+     v.push_back(30);
+     v.push_back(23);
+
+     v.pop_back();
+
+     v.print_vector();
+
+     return 0;
+}

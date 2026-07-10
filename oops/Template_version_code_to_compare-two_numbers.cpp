@@ -1,23 +1,25 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
-// Function Template
 
 template<typename T>
 
-T maximum(T a, T b)
-{
-    if(a > b)
+T maximum(T a,T b){
+     
+    if(a>b){
         return a;
-
-    return b;
+    }
+    else{
+        return b;
+    }
 }
 
-int main()
-{
-    cout << maximum(10,20) << endl;
+int main(){
+     
+    cout<<maximum(5,7)<<endl;
 
-    cout << maximum(3.5,6.2) << endl;
+    cout<<maximum(6.5,7.5)<<endl;
 
-    cout << maximum('A','Z') << endl;
+    return 0;
 }
+
+

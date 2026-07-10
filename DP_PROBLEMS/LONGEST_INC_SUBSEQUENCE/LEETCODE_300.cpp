@@ -1,42 +1,42 @@
 class Solution {
 public:
-    int memo(int ind,int prev,vector<vector<int>>&dp,vector<int>&nums){
-         
-          if(ind==nums.size()) return 0;
+    int memo(int prev,vector<vector<int>>&dp,vector<int>&nums,int ind){
 
+         if(ind>=nums.size()) return 0;
+         
           if(dp[ind][prev+1]!=-1) return dp[ind][prev+1];
 
-          int skip=memo(ind+1,prev,dp,nums);
-          int take=0;
+          int skip=memo(prev,dp,nums,ind+1);
 
-          if(prev==-1||nums[prev]<nums[ind]){
-            take=1+memo(ind+1,ind,dp,nums);
+          int total=0;
+
+          if(prev==-1 || nums[prev]<nums[ind]){
+              total=1+memo(ind,dp,nums,ind+1);
           }
 
-          return dp[ind][prev+1]=max(skip,take);
+          return dp[ind][prev+1]=max(skip,total);
     }
     int lengthOfLIS(vector<int>& nums) {
-          
+
           int n=nums.size();
+          int prev=-1;
+          
+          vector<int>dp(n,1);
 
-          vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+          int ans=1;
 
-          for(int ind=n-1;ind>=0;ind--){
-
-              for(int prevind=ind-1;prevind>=-1;prevind--){
-
-                  int skip=dp[ind+1][prevind+1];
-
-                  int take=0;
-
-                  if(prevind==-1||nums[prevind]<nums[ind]){
-                    take=1+dp[ind+1][ind+1];
+          for(int i=0;i<n;i++){
+              for(int j=0;j<i;j++){
+                 
+                  if(nums[j]<nums[i]){
+                     dp[i]=max(dp[i],dp[j]+1);
                   }
               }
+
+              ans=max(ans,dp[i]);
           }
 
-           
-
+          return ans;
 
     }
 };

@@ -26,8 +26,23 @@ public:
 
               vector<vector<int>>dp(n,vector<int>(n+1,-1));
 
-              int len=memo(pairs,dp,0,-1);
+             // int len=memo(pairs,dp,0,-1);
 
-              return len;
+             vector<int>dpp(n,1);
+
+             int ans=-1;
+
+             for(int i=0;i<n;i++){
+                 for(int j=0;j<i;j++){
+                     
+                      if(pairs[j][1]<pairs[i][0]){
+                          dpp[i]=max(dpp[i],dpp[j]+1);
+                      }
+                 }
+
+                 ans=max(ans,dpp[i]);
+             }
+
+             return ans;
     }
 };

@@ -1,41 +1,37 @@
 class Solution {
 public:
-    int n;
-    const int NEG = -1000000000;
 
-    int solve(int i, int xr, vector<int>& nums, int target,
-              unordered_map<long long, int>& dp) {
-        if (i == n) {
-            if (xr == target) {
-                return 0;
-            }
-            return NEG;
-        }
+    int solve(vector<vector<int>>&dp,vector<int>&nums,int target,int ind,int xorr){
+         
+          if(ind==nums.size()){
+             
+               if(xorr==target){
+                   return 0;
+               }
 
-        long long key = ((long long)i << 32) | (unsigned int)xr;
+               return mini;
+          }
 
-        if (dp.find(key) != dp.end()) {
-            return dp[key];
-        }
+          if(dp[ind][xorr]!=-1) return dp[ind][xorr];
 
-        int skip = solve(i + 1, xr, nums, target, dp);
+          int skip=solve(dp,nums,target,ind+1,xorr);
 
-        int take = 1 + solve(i + 1, xr ^ nums[i], nums, target, dp);
+          int take=1+solve(dp,nums,target,ind+1,xorr^nums[ind]);
 
-        dp[key] = max(skip, take);
-        return dp[key];
+          return dp[ind][xorr]=max(take,skip);
     }
-
     int minRemovals(vector<int>& nums, int target) {
-        n = nums.size();
-        unordered_map<long long, int> dp;
+        
+          int n=nums.size();
 
-        int maxKeep = solve(0, 0, nums, target, dp);
+          vector<vector<int>>dp(n+1,vector<int>(16384,-1));
 
-        if (maxKeep < 0) {
+          int keep=solve(dp,nums,target,0,0);
+
+          if(keep<0){
             return -1;
-        }
+          }
 
-        return n - maxKeep;
+          return n-keep;
     }
 };

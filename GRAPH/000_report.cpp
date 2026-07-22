@@ -4,3 +4,6 @@
 // DAY 03-:8 DSU,DIJKASTA,FLOYD done,
 
 // DAY 04-:463,743,797,1306,1559,1631,1976,3898,863,2385,1466,934,1091
+
+
+//DAY 05-:prims,1584,alien,dist_in_binary_maze,minimum_cost_to_connet_all_houses,minimum_multiplications_to_reach_end,dsu complete(2)

@@ -1,91 +1,71 @@
 class Solution {
 public:
+    void build_graph(unordered_map<TreeNode*,vector<TreeNode*>>&adj,TreeNode* root,TreeNode* &startnode,int start){
+         
+           if(!root) return ;
 
-    void buildParentMap(TreeNode* root,
-                        unordered_map<TreeNode*,TreeNode*>& parent,
-                        TreeNode*& startNode,
-                        int start)
-    {
-        queue<TreeNode*> q;
-        q.push(root);
+           if(root->val==start){
+               startnode=root;
+           }
 
-        while(!q.empty())
-        {
-            TreeNode* current = q.front();
-            q.pop();
+           if(root->left){
+             
+               adj[root].push_back(root->left);
+               adj[root->left].push_back(root);
 
-            if(current->val == start)
-            {
-                startNode = current;
-            }
+               build_graph(adj,root->left,startnode,start);
+           }
 
-            if(current->left)
-            {
-                parent[current->left] = current;
-                q.push(current->left);
-            }
+           if(root->right){
+               adj[root].push_back(root->right);
+               adj[root->right].push_back(root);
+               build_graph(adj,root->right,startnode,start);
+           }
 
-            if(current->right)
-            {
-                parent[current->right] = current;
-                q.push(current->right);
-            }
-        }
+
     }
-
     int amountOfTime(TreeNode* root, int start) {
+         
+           unordered_map<TreeNode*,vector<TreeNode*>>adj;
 
-        unordered_map<TreeNode*,TreeNode*> parent;
+           TreeNode* startnode=nullptr;
 
-        TreeNode* startNode = NULL;
+           build_graph(adj,root,startnode,start);
 
-        buildParentMap(root,parent,startNode,start);
+           queue<TreeNode*>q;
+           unordered_set<TreeNode*>st;
+           st.insert(startnode);
 
-        queue<TreeNode*> q;
-        unordered_map<TreeNode*,bool> visited;
+           q.push(startnode);
+           int time=0;
 
-        q.push(startNode);
-        visited[startNode] = true;
+           while(!q.empty()){
+                
+                 int size=q.size();
+                 bool burnednewnode=false;
 
-        int minutes = -1;
+                 for(int i=0;i<size;i++){
+                     
+                      TreeNode* temp=q.front();
+                      q.pop();
 
-        while(!q.empty())
-        {
-            int size = q.size();
+                      for(auto &nbr:adj[temp]){
+                         
+                           if(st.find(nbr)==st.end()){
+                                st.insert(nbr);
+                                q.push(nbr);
+                                burnednewnode=true;
+                           }
+                      }
+                 }
 
-            minutes++;
+                 if(burnednewnode){
+                     time++;
+                 }
 
-            for(int i=0;i<size;i++)
-            {
-                TreeNode* current = q.front();
-                q.pop();
 
-                // left child
-                if(current->left &&
-                   !visited[current->left])
-                {
-                    visited[current->left] = true;
-                    q.push(current->left);
-                }
+           }
 
-                // right child
-                if(current->right &&
-                   !visited[current->right])
-                {
-                    visited[current->right] = true;
-                    q.push(current->right);
-                }
-
-                // parent
-                if(parent.count(current) &&
-                   !visited[parent[current]])
-                {
-                    visited[parent[current]] = true;
-                    q.push(parent[current]);
-                }
-            }
-        }
-
-        return minutes;
+           return time;
     }
 };

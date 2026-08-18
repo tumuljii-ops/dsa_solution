@@ -1,71 +1,57 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
-    int precedence(char op) {
-        if (op == '+' || op == '-') return 1;
-        if (op == '*' || op == '/') return 2;
-        return 0;
-    }
-
-    int applyOp(int a, int b, char op) {
-        if (op == '+') return a + b;
-        if (op == '-') return a - b;
-        if (op == '*') return a * b;
-        if (op == '/') return a / b;  
-        return 0;
-    }
-
     int calculate(string s) {
-        stack<int> values;      
-        stack<char> ops;       
-        int n = s.size();
-        
-        for (int i = 0; i < n; i++) {
-            char c = s[i];
+           
+           long long result=0;
+           long long sign=1;
+           int n=s.length();
+           stack<long long>st;
 
-            if (c == ' ') continue;  
+           long long number=0;
 
-            if (isdigit(c)) {
-                int val = 0;
-                while (i < n && isdigit(s[i])) {
-                    val = val * 10 + (s[i] - '0');
-                    i++;
+           for(char ch:s){
+             
+                if(isdigit(ch)){
+                    number=number*10+(ch-'0');
+
                 }
-                i--;  
-                values.push(val);
-            }
-            else if (c == '(') {
-                ops.push(c);
-            }
-            else if (c == ')') {
-                while (!ops.empty() && ops.top() != '(') {
-                    int b = values.top(); values.pop();
-                    int a = values.top(); values.pop();
-                    char op = ops.top(); ops.pop();
-                    values.push(applyOp(a, b, op));
+                else if(ch=='+'){
+                     
+                     result=result+sign*number;
+                     sign=1;
+                     number=0;
                 }
-                ops.pop(); 
-            }
-            else {
-                while (!ops.empty() && precedence(ops.top()) >= precedence(c)) {
-                    int b = values.top(); values.pop();
-                    int a = values.top(); values.pop();
-                    char op = ops.top(); ops.pop();
-                    values.push(applyOp(a, b, op));
+                else if(ch=='-'){
+                     result=result+sign*number;
+                     sign=-1;
+                     number=0;
                 }
-                ops.push(c);
-            }
+                else if(ch=='('){
+                     st.push(result);
+                     st.push(sign);
+                     result=0;
+                     sign=1;
+                }
+                else if(ch==')'){
+                     
+                     result=result+sign*number;
+
+                     long long prevsign=st.top();
+                     st.pop();
+                     
+                     long long prevres=st.top();
+                     st.pop();
+
+                     result=result+prevres*prevsign;
+                     number=0;
+                }
+           }
+
+           result=result+number*sign;
+
+
+           return (int)result;
+           
+           
         }
-
-        while (!ops.empty()) {
-            int b = values.top(); values.pop();
-            int a = values.top(); values.pop();
-            char op = ops.top(); ops.pop();
-            values.push(applyOp(a, b, op));
-        }
-
-        return values.top();
-    }
 };

@@ -1,40 +1,41 @@
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int indexDiff, int valueDiff) {
+          
+            vector<pair<long long,int>>vec;
 
-        vector<pair<long long, int>> vec;
-
-        // Store (value, original index)
-        for (int i = 0; i < nums.size(); i++) {
-            vec.push_back({nums[i], i});
-        }
-
-        // Sort by value
-        sort(vec.begin(), vec.end());
-
-        set<int> st;      // Stores indices in current value window
-        int left = 0;
-
-        for (int right = 0; right < vec.size(); right++) {
-
-            while (vec[right].first - vec[left].first > valueDiff) {
-                st.erase(vec[left].second);
-                left++;
+            for(int i=0;i<nums.size();i++){
+                  vec.push_back({nums[i],i});
             }
 
-            int idx = vec[right].second;
+            sort(vec.begin(),vec.end());
 
-            // Find first index >= idx - indexDiff
-            auto it = st.lower_bound(idx - indexDiff);
+            set<int>st;
 
-            // Check if it lies within idx + indexDiff
-            if (it != st.end() && *it <= idx + indexDiff)
-                return true;
+            int left=0;
+            int right=0;
 
-            // Insert current index
-            st.insert(idx);
-        }
+            int n=nums.size();
 
-        return false;
+            while(right<n){
+                 
+                while(vec[right].first-vec[left].first>valueDiff){
+                       st.erase(vec[left].second);
+                       left++;
+                 }
+
+                 int ind=vec[right].second;
+
+                 auto it=st.lower_bound(ind-indexDiff);
+
+                 if(it!=st.end() && *it<=ind+indexDiff){
+                     return true;
+                 }
+
+                 st.insert(ind);
+                 right++;
+            }
+
+            return false;
     }
 };

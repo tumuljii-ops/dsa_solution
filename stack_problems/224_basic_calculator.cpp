@@ -1,57 +1,61 @@
 class Solution {
 public:
     int calculate(string s) {
-           
-           long long result=0;
-           long long sign=1;
-           int n=s.length();
-           stack<long long>st;
+         
+         long long result=0;
+         long long num=0;
 
-           long long number=0;
+         long long sign=1;
 
-           for(char ch:s){
+         stack<long long>st;
+
+         int n=s.length();
+
+         for(int i=0;i<n;i++){
              
-                if(isdigit(ch)){
-                    number=number*10+(ch-'0');
-
-                }
-                else if(ch=='+'){
-                     
-                     result=result+sign*number;
-                     sign=1;
-                     number=0;
-                }
-                else if(ch=='-'){
-                     result=result+sign*number;
+               if(isdigit(s[i])){
+                 
+                   num=num*10+(s[i]-'0');
+               }
+               else if(s[i]=='+'){
+                 
+                    result=result+num*sign;
+                    num=0;
+                    sign=1;
+               }
+               else if(s[i]=='-'){
+                 
+                     result=result+num*sign;
+                     num=0;
                      sign=-1;
-                     number=0;
-                }
-                else if(ch=='('){
+               }
+               else if(s[i]=='('){
+                 
                      st.push(result);
                      st.push(sign);
                      result=0;
                      sign=1;
-                }
-                else if(ch==')'){
-                     
-                     result=result+sign*number;
+               }
+               else if(s[i]==')'){
+                 
+                    result=result+num*sign;
 
-                     long long prevsign=st.top();
-                     st.pop();
-                     
-                     long long prevres=st.top();
-                     st.pop();
+                    long long prev_sign=st.top();
+                    st.pop();
 
-                     result=result+prevres*prevsign;
-                     number=0;
-                }
-           }
+                    long long prev_num=st.top();
+                    st.pop();
 
-           result=result+number*sign;
+                    result=prev_num+result*prev_sign;
+                    num=0;
+                    sign=1;
 
 
-           return (int)result;
-           
-           
-        }
+               }
+         }
+
+         result=result+num*sign;
+
+         return (int)result;
+    }
 };

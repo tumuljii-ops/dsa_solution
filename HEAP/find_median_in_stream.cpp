@@ -1,89 +1,66 @@
 class Solution {
-public:
-    vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
-           
-             int n=grid.size();
-             int m=grid[0].size();
-
-             vector<vector<int>>ans(n,vector<int>(m,0));
-
-             ans[0][0]=grid[0][0];
-
-             for(int i=1;i<n;i++){
-                 
-                  ans[0][i]=ans[0][i-1]+grid[0][i];
-             }
-
-             for(int j=1;j<m;j++){
-                  ans[j][0]=ans[j-1][0]+grid[j][0];
-             }
-
-
-             for(int i=1;i<n;i++){
-                  
-                  for(int j=1;j<m;j++){
-                       
-                        ans[i][j]=ans[i-1][j]+ans[i][j-1]+grid[i][j]-ans[i-1][j-1];
+  public:
+    vector<double> getMedian(vector<int> &arr) {
+        // code here
+        
+        priority_queue<int>pq;
+        
+        priority_queue<int,vector<int>,greater<int>>pq1;
+        
+        
+        vector<double>ans;
+        
+        if(arr.size()==0) return ans;
+        
+        ans.push_back(arr[0]);
+        pq.push(arr[0]);
+        int n=arr.size();
+        
+        for(int i=1;i<n;i++){
+             
+              
+                if(arr[i]<=pq.top()){
+                     pq.push(arr[i]);
+                }
+                else{
+                     pq1.push(arr[i]);
+                }
+                
+                while(pq.size()> pq1.size()+1){
+                     
+                      int top=pq.top();
                       
-                  }
-             }
-
-             vector<vector<int>>ans1(n,vector<int>(m,0));
-
-             if(grid[0][0]==0){
-                 ans1[0][0]=1;
-             }
-             else{
-                 ans1[0][0]=0;
-             }
-
-             for(int i=1;i<n;i++){
-                 
-                   if(grid[0][i]==0){
-                        ans1[0][i]=ans1[0][i-1]+1;
-                   }
-                   else{
-                      ans1[0][i]=ans1[0][i-1];
-                   }
-             }
-
-             for(int j=1;j<m;j++){
-                   if(grid[0][j]==0){
-                        ans1[j][0]=ans1[j-1][0]+1;
-                   }
-                   else{
-                      ans1[j][0]=ans1[j-1][0];
-                   }
-                   
-             }
-
-             for(int i=1;i<n;i++){
-                 for(int j=1;j<m;j++){
+                      pq.pop();
+                      
+                      pq1.push(top);
+                }
+                
+                while(pq1.size()>pq.size()){
                      
-                     if(grid[i][j]==0){
-                         ans1[i][j]=ans1[i-1][j]+ans1[i][j-1]+1-ans[i-1][j-1];
-                          
-                     }
-                     else{
-                        ans1[i][j]=ans1[i-1][j]+ans1[i][j-1]-ans[i-1][j-1];
-                     }
-                 }
-             }
-
-
-
-            vector<vector<int>>diff(n,vector<int>(m,0));
-
-            for(int i=0;i<n;i++){
-                 for(int j=0;j<m;j++){
+                      int top=pq1.top();
+                      
+                      pq1.pop();
+                      
+                      pq.push(top);
+                }
+                
+                int x=pq.top();
+                
+                if(((i+1)%2)==0){
+                     int y=pq1.top();
                      
-                       diff[i][j]=ans[i][n-1]+ans[m-1][i]-ans1[i][n-1]-ans1[m-1][i];
-                 }
-            }
-
-
-             return diff;
-
-
+                     double z=(x+y)/2.0;
+                     
+                     ans.push_back(z);
+                     
+                }
+                else{
+                     
+                     ans.push_back(0.0+x);
+                }
+        }
+        
+        return ans;
+        
     }
 };

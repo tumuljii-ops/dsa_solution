@@ -1,0 +1,287 @@
+%-------------------------
+% Resume in Latex
+% Author : Aditya Kumar, 1410adityakumar@gmail.com
+% License : MIT
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[expansion=false]{microtype}
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=0.6cm, top=0.5cm, right=0.6cm, bottom=0.5cm}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{:\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1},\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\newcommand{\resumeExpHeading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} $|$ \textit{#2} $|$ #3 & \textit{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProjHeading}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{\footnotesize #1} \scriptsize{$|$ #2} & \scriptsize{\textit{#3}}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{0.3mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2.5mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-3mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Tumul Singh} % Your Name
+\newcommand{\course}{Bachelor of Technology - Information Technology} % Your Course
+\newcommand{\roll}{124103032} % Your Roll No.
+\newcommand{\phone}{6261919803} % Your Phone Number
+\newcommand{\emaila}{tumuljii@gmail.com} %Email
+\newcommand{\github}{tumuljii-ops} %Github
+\newcommand{\linkedin}{tumul-singh-b23a493a7} %linkedin
+\newcommand{\kaggle}{tumulsingh3032} %Kaggle
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+\linespread{0.96}\selectfont
+%----------HEADING-----------------
+\parbox{2.35cm}{%
+
+\includegraphics[width=2.5 cm,clip]{logo_nitkkr.png}
+
+}\parbox{\dimexpr\linewidth-2.8cm\relax}{
+\begin{tabularx}{\linewidth}{L r}
+  \textbf{\LARGE \name} & +91-\phone\\
+  \roll & \href{mailto:\emaila}{\emaila}\\
+  \course & \href{https://www.linkedin.com/in/\linkedin/}{LinkedIn}\\
+  {National Institute of Technology, Kurukshetra} & \href{https://github.com/\github}{GitHub} $|$ \href{https://kaggle.com/\kaggle}{Kaggle}
+\end{tabularx}
+}
+
+\vspace{-2mm}
+%-------------SUMMARY-----------------
+\section{\textbf{Summary}}
+B.Tech IT student at NIT Kurukshetra \textbf{(CGPA 9.07/10)} with strong foundations in \textbf{Machine Learning, Data Science}, and \textbf{full-stack development}. \textbf{1400+ DSA/CP problems solved}, seeking to apply strong analytical and engineering skills to real-world software and AI/ML problems.
+\vspace{-3mm}
+%-----------EDUCATION-----------------
+\section{\textbf{Education}}
+\setlength{\tabcolsep}{5pt} % Default value: 6pt
+\small{\begin{tabularx}
+{\dimexpr\textwidth-2mm\relax}{|c|C|c|c|c|}
+  \hline
+  \textbf{Degree } & \textbf{Institute} & \textbf{Board / University} & \textbf{CGPA/Percentage} & \textbf{Year}\\
+  \hline
+  B.Tech IT & National Institute of Technology, Kurukshetra & NIT Kurukshetra & \textbf{9.07 (CGPA)} & 2024-2028\\
+  \hline
+\end{tabularx}}
+\vspace{-4mm}
+
+%-----------EXPERIENCE-----------------
+\section{\textbf{Experience}}
+  \resumeSubHeadingListStart
+
+    \resumeExpHeading
+      {Bluestock Fintech}{Data Analysis Intern}{Remote}{May 2026 -- Jul 2026}
+      \resumeItemListStart
+        \item {Developed a modular \textbf{Financial Analytics Platform} for NIFTY-100 company data, building an \textbf{ETL pipeline} to clean, validate, and integrate financial statement, market, and sector datasets into a normalized \textbf{SQLite} database.}
+        \item {Built a \textbf{Financial Ratio Engine} computing profitability, leverage, liquidity, growth, and cash-flow KPIs (\textbf{ROE, ROCE, Debt-to-Equity, Interest Coverage, FCF, CAGR}) with edge-case handling.}
+        \item {Implemented a configurable \textbf{Stock Screener} with custom filters, composite quality scoring, and peer/sector-wise ranking; developed an interactive \textbf{Streamlit} dashboard with financial visualizations and downloadable Excel/PDF reports.}
+      \resumeItemListEnd
+
+    \resumeExpHeading
+      {NITERON}{Software Development Intern}{Remote}{Feb 2026 -- Apr 2026}
+      \resumeItemListStart
+        \item {Integrated an \textbf{AI recommendation module} into the client onboarding workflow of a wealth management portal, connecting frontend forms with \textbf{AWS Amplify AI Generation APIs} using \textbf{GraphQL}.}
+        \item {Configured and tested \textbf{Amazon Cognito} authentication to secure AI requests; debugged GraphQL, authentication flow, and backend AI integration issues in collaboration with the development team.}
+      \resumeItemListEnd
+
+    \resumeExpHeading
+      {InAmigos Foundation}{Data Analysis Intern}{Remote}{Jan 2026 -- Feb 2026}
+      \resumeItemListStart
+        \item {Performed \textbf{AI-assisted research} and data analysis on 20+ social-impact initiatives, NGOs, and fundraising trends, producing structured reports and actionable insights to support decision-making and awareness campaigns.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-6.5mm}
+%-----------PROJECTS-----------------
+\section{\textbf{Projects}}
+\resumeSubHeadingListStart
+
+    \resumeProjHeading
+      {Netflix Movie Recommendation Engine using Matrix Factorization}
+      {\href{https://github.com/tumuljii-ops/NETFLIX_MOVIE_RECOMMENDATION}{\textbf{GitHub}} $|$ \href{https://netflixmovierecommendation-2xttfw5igudh2ddf6cdccm.streamlit.app/}{\textbf{Live Demo}}}
+      {Advised by: Dr. Shweta Sharma}
+      \resumeItemListStart
+        \item {Created a recommendation engine using \textbf{NMF} on \textbf{100,000+ MovieLens ratings} to model latent user–item preference structures, achieving an \textbf{RMSE of 0.92}, and delivered \textbf{top-5 personalized recommendations} via user–item similarity in the learned latent space.}
+        \item {Deployed a \textbf{FastAPI} backend and \textbf{Streamlit} frontend to \textbf{Render}; packaged with \textbf{Docker} for scalable production deployment.}
+      \resumeItemListEnd
+
+    \resumeProjHeading
+      {Pneumonia Detection from Chest X-Rays using Deep Learning}
+      {\href{https://github.com/tumuljii-ops/Pneumonia-Detection-Final}{\textbf{GitHub}} $|$ \href{https://pneumonia-detection-final-o5ouoyks99js3zresnsqdm.streamlit.app/}{\textbf{Live Demo}}}
+      {Guided by: Dr. Shweta Sharma}
+      \resumeItemListStart
+        \item {Developed an end-to-end \textbf{Computer Vision} pipeline for medical image classification on \textbf{5,000+ labeled chest X-ray images}; \textbf{MobileNetV2 Transfer Learning} achieved \textbf{91\% accuracy} and \textbf{96\% recall}, outperforming a from-scratch ANN (74\%) and custom CNN (87\%).}
+        \item {Built a \textbf{FastAPI} inference API, \textbf{Streamlit} web application, and a \textbf{Dockerized} deployment pipeline; shipped a production-ready solution on \textbf{Render} for real-time diagnosis.}
+      \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6.3mm}
+
+\section{\textbf{Technical Skills}}
+ \resumeHeadingSkillStart
+  \resumeSubItem{Programming Languages} % Category
+    {Python, C++, Java, SQL}
+
+ \resumeSubItem{ML / AI} % Category
+    {Supervised Learning, Regression, Classification, XGBoost, Random Forest, NMF, CNNs, ANNs, RNNs, LSTMs, Transformers, NLP, Transfer Learning}
+
+ \resumeSubItem{Frameworks \& Data Science} % Category
+    {TensorFlow, Keras, Scikit-learn, NumPy, Pandas, Matplotlib, Power BI, Feature Engineering, Hyperparameter Tuning}
+
+ \resumeSubItem{Backend \& Deployment} % Category
+    {FastAPI, Streamlit, Docker, REST APIs, AWS Amplify, GraphQL, Amazon Cognito, Render, Node.js,React ,Express.js}
+
+ \resumeSubItem{Tools} % Category
+    {Git, GitHub, Google Colab, Kaggle, VS Code}
+
+ \resumeHeadingSkillEnd
+
+\vspace{-1.5mm}
+
+\section{\textbf{Positions of Responsibility}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+  \resumePOR{Active Member} % Position
+    {ANANT -- Mathematics \& Technical Society, NIT Kurukshetra} %Club
+    {2024 -- Present} %Tenure Period
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+
+\section{\textbf{Achievements}}
+\vspace{-0.1mm}
+\resumeItemListStart
+\resumeItem{DSA / Competitive Programming}
+    {Solved \textbf{1400+ problems} across \textbf{LeetCode (rating 1858+)}, \textbf{CodeChef (3-star, 1690+)}, Codeforces and GeeksforGeeks; competed in \textbf{36+ live} and \textbf{30+ virtual contests}}
+\resumeItem{Mathematics Olympiad (IMO)}
+    {Secured \textbf{International Rank 245} and \textbf{State Rank 3} in the International Mathematics Olympiad}
+\resumeItem{JEE Mains 2024}
+    {Scored \textbf{99.5 percentile}, qualifying for JEE Advanced}
+\resumeItem{NLP for Legal-Tech Automation}
+    {Built an NLP pipeline that extracted compliance actions and appeal decisions from \textbf{100+ High Court judgment PDFs} to automate a Court Case Monitoring System (CCMS)}
+\resumeItem{Kaggle Competitions}
+    {Built end-to-end ML pipelines for House Price Prediction and Titanic Survival, placing across \textbf{2 competitions}}
+\resumeItem{Content Creation}
+    {Created and grew a YouTube channel to \textbf{170+ subscribers} in its first year, publishing JEE strategy and preparation content}
+\resumeItemListEnd
+
+%-------------------------------------------
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}

@@ -2,7 +2,8 @@ class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
         
-        vector<vector<int>> dist(n, vector<int>(n, 1e9));
+        vector<vector<int>> dist(n, vector<int>(n, 1e9)); 
+        
         for (int i = 0; i < n; i++) {
             dist[i][i] = 0;
         }
